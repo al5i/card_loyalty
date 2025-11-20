@@ -40,6 +40,7 @@ class Card implements Cards{
         };
 
         return $user_card;
+        
         // unset($db);
         // $db[$user_card.] = $user_card;
         // print_r($db);
