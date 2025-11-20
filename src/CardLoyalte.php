@@ -6,7 +6,6 @@ $db = [
 
 interface Cards{
 
-    public function __construct();
     public function getGoal();//при достижении 100к-200-300к считаем и обновляем $status;
 }
 
@@ -24,10 +23,10 @@ interface Users {
 
 class Card implements Cards{
 
-    private $user;
+    private Users $user;
 
-    public function __construct(){
-        $this->user = new User();
+    public function __construct(Users $user) {
+        $this->user = $user;
     }
 
     public function getGoal ()
@@ -48,12 +47,9 @@ class Card implements Cards{
     }
 }
 
-class User implements Users{
+class UserCardService implements Users{
 
     private $orderSum = 250000;
-
-    public function  __construct(){
-    }
 
     public function getProgressToChangeStatus($orderSum, $status){
         return;
@@ -64,6 +60,17 @@ class User implements Users{
     }
 }
 
-$user_card = new Card();
-$user_card = $user_card->getGoal();
+class User {
+
+    private $id;
+    private $phone;
+    private $email;
+
+    public function  __construct(){
+    }
+}
+
+$userCardService = new UserCardService();
+$userCard = new Card($userCardService);
+$user_card = $userCard->getGoal();
 print_r($user_card);
